@@ -134,6 +134,33 @@ searchBtn.addEventListener('click', async () => {
     }
 });
 
+// Current location
+currentLocationBtn.addEventListener('click', () => {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(async (position) => {
+            const { latitude, longitude } = position.coords;
+            const currentUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}`;
+            const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${apiKey}`;
+            
+            const currentData = await fetchWeather(currentUrl);
+            const forecastData = await fetchWeather(forecastUrl);
+            if (currentData && forecastData) {
+                displayCurrentWeather(currentData);
+                displayForecast(forecastData);
+                // Add to recent searches if not already present
+                const city = currentData.name;
+                if (!recentCities.includes(city)) {
+                    recentCities.push(city);
+                    localStorage.setItem('recentCities', JSON.stringify(recentCities));
+                    updateRecentSearches();
+                }
+            }
+        }, () => showError('Geolocation access denied.'));
+    } else {
+        showError('Geolocation not supported.');
+    }
+});
+
 
 
 
