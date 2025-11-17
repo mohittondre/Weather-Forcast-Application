@@ -43,7 +43,7 @@ The application is designed for desktop, tablet (e.g., iPad Mini), and mobile (e
    - Obtain your API key.
    - In `script.js`, replace `'4f22458649848a353d8b5b9c895701ae'` with your actual API key:
      ```javascript
-     const apiKey = 'YOUR_ACTUAL_API_KEY';
+     const apiKey = '4f22458649848a353d8b5b9c895701ae';
      ```
 
 4. **Run the Application**:
