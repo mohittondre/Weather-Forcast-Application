@@ -67,7 +67,51 @@ function displayCurrentWeather(data) {
     } else {
         document.body.classList.remove('rainy');
     }
+
+       // Extreme temp alert (in Celsius)
+    if (currentTempCelsius > 40) {
+        showError('Extreme heat alert: Temperature above 40°C!');
+    }
     
+    currentWeather.classList.remove('hidden');
+}
+
+// Display 5-day forecast (always in °C, no toggle)
+function displayForecast(data) {
+    const forecastCards = document.getElementById('forecastCards');
+    forecastCards.innerHTML = '';
+    const dailyData = data.list.filter((item, index) => index % 8 === 0); // Every 24 hours
+    
+    dailyData.forEach(day => {
+        const date = new Date(day.dt * 1000).toDateString();
+        const temp = Math.round(day.main.temp - 273.15);
+        
+        // Determine dynamic background based on weather condition
+        let bgClass = 'bg-white'; // Default
+        const condition = day.weather[0].main.toLowerCase();
+        if (condition.includes('rain') || condition.includes('snow')) {
+            bgClass = 'bg-gradient-to-br from-blue-200 to-blue-400';
+        } else if (condition.includes('clear')) {
+            bgClass = 'bg-gradient-to-br from-yellow-200 to-yellow-400';
+        } else if (condition.includes('cloud')) {
+            bgClass = 'bg-gradient-to-br from-gray-200 to-gray-400';
+        }
+        
+        const card = document.createElement('div');
+        card.className = `${bgClass} p-4 rounded-lg shadow hover:shadow-lg transition text-gray-800`; // Added text color for contrast
+        card.innerHTML = `
+            <p class="font-semibold">${date}</p>
+            <i class="wi wi-owm-${day.weather[0].id} text-3xl"></i>
+            <p>${temp}°C</p>
+            <p><i class="wi wi-humidity"></i> ${day.main.humidity}%</p>
+            <p><i class="wi wi-strong-wind"></i> ${day.wind.speed} m/s</p>
+        `;
+        forecastCards.appendChild(card);
+    });
+    forecast.classList.remove('hidden');
+}
+
+
 
 
 
