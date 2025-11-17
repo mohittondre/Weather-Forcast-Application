@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Forecast App</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.12/css/weather-icons.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gradient-to-br from-blue-400 to-purple-600 min-h-screen flex items-center justify-center p-4">
+    <div class="max-w-4xl w-full bg-white bg-opacity-90 rounded-lg shadow-lg p-6">
+        <h1 class="text-3xl font-bold text-center mb-6 text-gray-800">Weather Forecast</h1>
+        
+        <!-- Search Section -->
+        <div class="flex flex-col md:flex-row gap-4 mb-6">
+            <input type="text" id="cityInput" placeholder="Enter city name" class="flex-1 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <button id="searchBtn" class="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600">Search</button>
+            <button id="currentLocationBtn" class="bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600">Current Location</button>
+        </div>
+        
+        <!-- Recent Searches Dropdown -->
+        <div class="mb-6">
+            <select id="recentSearches" class="w-full p-3 border rounded-lg">
+                <option value="">Recently Searched Cities</option>
+            </select>
+        </div>
+        
+        <!-- Current Weather -->
+        <div id="currentWeather" class="hidden bg-gray-100 p-6 rounded-lg mb-6">
+            <h2 class="text-2xl font-semibold mb-4">Current Weather</h2>
+            <div class="flex items-center justify-between">
+                <div>
+                    <p id="cityName" class="text-xl"></p>
+                    <p id="temperature" class="text-3xl font-bold"></p>
+                    <button id="unitToggle" class="mt-2 bg-gray-300 px-3 py-1 rounded">Toggle °C/°F</button>
+                </div>
+                <div class="text-center">
+                    <i id="weatherIcon" class="wi text-6xl"></i>
+                    <p id="description"></p>
+                </div>
+            </div>
+            <div class="mt-4 grid grid-cols-2 gap-4">
+                <p><i class="wi wi-humidity"></i> Humidity: <span id="humidity"></span>%</p>
+                <p><i class="wi wi-strong-wind"></i> Wind: <span id="windSpeed"></span> m/s</p>
+            </div>
+        </div>
+        
+        <!-- 5-Day Forecast -->
+        <div id="forecast" class="hidden">
+            <h2 class="text-2xl font-semibold mb-4">5-Day Forecast</h2>
+            <div id="forecastCards" class="grid grid-cols-1 md:grid-cols-5 gap-4"></div>
+        </div>
+        
+        <!-- Error Pop-up -->
+        <div id="errorPopup" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+            <div class="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full">
+                <p id="errorMessage" class="text-red-600"></p>
+                <button id="closeError" class="mt-4 bg-red-500 text-white px-4 py-2 rounded">Close</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
