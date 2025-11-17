@@ -111,6 +111,29 @@ function displayForecast(data) {
     forecast.classList.remove('hidden');
 }
 
+// Search by city
+searchBtn.addEventListener('click', async () => {
+    const city = cityInput.value.trim();
+    if (!city) {
+        showError('Please enter a city name.');
+        return;
+    }
+    const currentUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
+    const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`;
+    
+    const currentData = await fetchWeather(currentUrl);
+    const forecastData = await fetchWeather(forecastUrl);
+    if (currentData && forecastData) {
+        displayCurrentWeather(currentData);
+        displayForecast(forecastData);
+        if (!recentCities.includes(city)) {
+            recentCities.push(city);
+            localStorage.setItem('recentCities', JSON.stringify(recentCities));
+            updateRecentSearches();
+        }
+    }
+});
+
 
 
 
