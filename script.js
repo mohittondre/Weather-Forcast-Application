@@ -161,6 +161,22 @@ currentLocationBtn.addEventListener('click', () => {
     }
 });
 
+// Recent search selection
+recentSearches.addEventListener('change', (e) => {
+    if (e.target.value) {
+        cityInput.value = e.target.value;
+        searchBtn.click();
+    }
+});
+
+// Temperature toggle (only for today's temperature)
+unitToggle.addEventListener('click', () => {
+    if (currentTempCelsius === null) return; // No data to toggle
+    isCelsius = !isCelsius;
+    const temp = isCelsius ? currentTempCelsius : Math.round(currentTempCelsius * 9/5 + 32);
+    document.getElementById('temperature').textContent = `${temp}°${isCelsius ? 'C' : 'F'}`;
+});
+
 
 
 
