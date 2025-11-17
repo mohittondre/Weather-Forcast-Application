@@ -50,4 +50,24 @@ async function fetchWeather(url) {
     }
 }
 
+// Display current weather
+function displayCurrentWeather(data) {
+    currentTempCelsius = Math.round(data.main.temp - 273.15); // Store in Celsius for toggle
+    const temp = isCelsius ? currentTempCelsius : Math.round(currentTempCelsius * 9/5 + 32);
+    document.getElementById('cityName').textContent = data.name;
+    document.getElementById('temperature').textContent = `${temp}°${isCelsius ? 'C' : 'F'}`;
+    document.getElementById('description').textContent = data.weather[0].description;
+    document.getElementById('humidity').textContent = data.main.humidity;
+    document.getElementById('windSpeed').textContent = data.wind.speed;
+    document.getElementById('weatherIcon').className = `wi wi-owm-${data.weather[0].id}`;
+    
+    // Dynamic background: Add/remove 'rainy' class without disrupting other body classes
+    if (data.weather[0].main.toLowerCase() === 'rain') {
+        document.body.classList.add('rainy');
+    } else {
+        document.body.classList.remove('rainy');
+    }
+    
+
+
 
