@@ -1,0 +1,22 @@
+/* Custom styles for dynamic backgrounds and responsiveness */
+body.rainy {
+    background: linear-gradient(to bottom, #4a90e2, #357abd) !important;
+    animation: rain 1s infinite;
+}
+
+@keyframes rain {
+    0% { background-position: 0 0; }
+    100% { background-position: 10px 10px; }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) { /* iPad Mini */
+    .max-w-4xl { max-width: 90%; }
+    #forecastCards { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 375px) { /* iPhone SE */
+    .max-w-4xl { max-width: 95%; }
+    #forecastCards { grid-template-columns: 1fr; }
+    .text-3xl { font-size: 1.5rem; }
+}
