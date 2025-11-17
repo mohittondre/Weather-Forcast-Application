@@ -26,4 +26,15 @@ function updateRecentSearches() {
 }
 updateRecentSearches();
 
+// Show error pop-up
+function showError(message) {
+    errorMessage.textContent = message;
+    errorPopup.classList.remove('hidden');
+}
+
+// Close error pop-up
+closeError.addEventListener('click', () => {
+    errorPopup.classList.add('hidden');
+});
+
 
