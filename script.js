@@ -9,3 +9,21 @@ const errorPopup = document.getElementById('errorPopup');
 const errorMessage = document.getElementById('errorMessage');
 const closeError = document.getElementById('closeError');
 const unitToggle = document.getElementById('unitToggle');
+
+let isCelsius = true; // For temperature toggle
+let recentCities = JSON.parse(localStorage.getItem('recentCities')) || [];
+let currentTempCelsius = null; // Store original temp in Celsius for accurate toggling
+
+// Update recent searches dropdown
+function updateRecentSearches() {
+    recentSearches.innerHTML = '<option value="">Recently Searched Cities</option>';
+    recentCities.forEach(city => {
+        const option = document.createElement('option');
+        option.value = city;
+        option.textContent = city;
+        recentSearches.appendChild(option);
+    });
+}
+updateRecentSearches();
+
+
