@@ -38,3 +38,16 @@ closeError.addEventListener('click', () => {
 });
 
 
+// Fetch weather data
+async function fetchWeather(url) {
+    try {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error('City not found or API error');
+        return await response.json();
+    } catch (error) {
+        showError(error.message);
+        return null; // Return null on error to handle gracefully
+    }
+}
+
+
